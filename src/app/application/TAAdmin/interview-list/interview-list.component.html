@@ -1,0 +1,173 @@
+<div class="  bg-white shadow-lg ml-4">
+
+  <!-- Header -->
+  <h2 class="text-3xl font-semibold text-[#7a4c8f] mb-4">Interview List</h2>
+
+  <!-- Filters -->
+  <div class="flex flex-wrap gap-3 mb-4">
+    <!-- Search Box - Panel Member -->
+    <input type="text" [(ngModel)]="SearchQuery" (keyup)="applyFilter()" placeholder="Search name"
+      class="w-64 p-1 border border-purple-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+    <!-- Date Input -->
+    <input type="date" [(ngModel)]="selectedDate" (change)="applyFilter()"
+      class="w-36 p-1 border border-purple-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+    <!-- Time Input - From -->
+    <input type="time" [(ngModel)]="fromTime" (change)="applyFilter()"
+      class=" p-1 border border-purple-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+    <!-- Time Input - To -->
+    <input type="time" [(ngModel)]="toTime" (change)="applyFilter()"
+      class=" p-1 border border-purple-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+    <!-- Status Filter -->
+    <select [(ngModel)]="selectedStatus" (change)="applyFilter()"
+      class="w-24 p-1 border border-purple-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+    </select>
+
+    <!-- Reset Button -->
+    <button
+      class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-2 py-1 rounded-md hover:bg-purple-700 transition"
+      (click)="resetFilters()">
+      Reset Filters
+    </button>
+  </div>
+
+
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <div *ngIf="dataSource.filteredData.length === 0" class="p-6 text-center text-gray-600">
+      No interviews found matching the selected filter.
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort
+      class="w-full border-collapse border border-gray-300 shadow-md rounded-lg">
+
+      <!-- PanelMember -->
+      <ng-container matColumnDef="panelMemberName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          PanelMember
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800">
+          {{ interview.panelMemberName }}
+        </td>
+      </ng-container>
+
+      <!-- Candidate -->
+      <ng-container matColumnDef="candidate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          Candidate
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800 candidate-cell">
+          {{interview.candidateName }}
+        </td>
+      </ng-container>
+
+      <!-- Reporting Manager -->
+      <ng-container matColumnDef="reportingManager">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          ReportingManager
+        </th>
+        <td mat-cell *matCellDef="let interview"
+          class="!border border-gray-300 px-6 py-3 text-gray-800 reporting-manager-cell">
+          {{interview.reportingManager }}
+        </td>
+      </ng-container>
+
+
+      <!-- Date -->
+      <ng-container matColumnDef="startTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          StartTime
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800">
+          {{ interview.startTime}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          EndTime
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800">
+          {{ interview.endTime}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          Date
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800">
+          {{ interview.date | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          Status
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-6 py-3 text-gray-800">
+          <span class="px-3 py-1 rounded-full text-sm font-medium" [matTooltip]="getStatusTooltip(interview.status)"
+            [ngClass]="{
+    'bg-purple-200 text-purple-800': interview.status === 'Scheduled',
+    'bg-red-200 text-red-800': interview.status === 'Cancelled',
+    'bg-yellow-200 text-yellow-600': interview.status === 'Request Cancellation'
+  }">
+            {{ interview.status }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-1 py-3 text-left">
+          Actions
+        </th>
+        <td mat-cell *matCellDef="let interview" class="!border border-gray-300 px-1 py-3 text-gray-800">
+          <!-- Cancelled status: Show "No actions" -->
+    <span *ngIf="interview.status === 'Cancelled'" class="text-gray-500 italic">
+      No actions
+    </span>
+          <!-- Cancel button: Only show if status is 'Scheduled' -->
+          <button *ngIf="interview.status === 'Scheduled'" (click)="cancelInterview(interview.interviewId, 'Cancelled')"
+            class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-2 py-2 rounded-md hover:bg-green-600">
+            Cancel
+          </button>
+
+          <!-- Approve/Reject buttons: Only show if status is 'Request Cancellation' -->
+          <ng-container *ngIf="interview.status === 'Request Cancellation'">
+            <div class="flex space-x-2">
+              <button (click)="cancelInterview(interview.interviewId, 'Approved')"
+                class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white  px-2 py-2 rounded-md">
+                Approve
+              </button>
+              <button (click)="cancelInterview(interview.interviewId, 'Rejected')"
+                class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white  px-2 py-2 rounded-md">
+                Reject
+              </button>
+            </div>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <!-- Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

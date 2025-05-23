@@ -1,0 +1,193 @@
+<div class="p-6 max-h-screen pt-20 bg-violet-100">
+  <!--  Toggle Buttons -->
+  <div class="flex gap-4 mb-6">
+    <button (click)="showSection('get')" 
+      class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-lg hover:bg-violet-700 transition">
+      Get Users
+    </button>
+    <button (click)="showSection('create')" 
+      class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-lg hover:bg-violet-500 transition">
+      Create User
+    </button>
+  </div>
+
+  <!--  Users List Section -->
+  <div *ngIf="activeSection === 'get'" class="bg-white p-6 rounded-lg shadow-md">
+    
+    <!--  Search Bar -->
+    <label for="search" class="sr-only">Search Users</label>
+    <input id="search" type="text" (keyup)="applyFilter($event)" 
+      class="w-full p-2 border border-gray-300 rounded-lg focus:ring-violet-500 focus:border-violet-500"
+      placeholder="Search by Name, Email, or Role">
+
+    <!--  Users Table -->
+    <div class="overflow-x-auto mt-4">
+      <table mat-table [dataSource]="dataSource" matSort class="w-full border-collapse bg-white shadow-lg rounded-lg">
+        
+        <!--  Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white p-3 text-left">Name</th>
+          <td mat-cell *matCellDef="let user" class="p-3">{{ user.name }}</td>
+        </ng-container>
+
+        <!--  Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white p-3 text-left">Email</th>
+          <td mat-cell *matCellDef="let user" class="p-3">{{ user.email }}</td>
+        </ng-container>
+
+        <!--  Role Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white p-3 text-left">Role</th>
+          <td mat-cell *matCellDef="let user" class="p-3">{{ user.roleName || 'N/A' }}</td>
+        </ng-container>
+
+        <!--  Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white p-3 text-center">Actions</th>
+          <td mat-cell *matCellDef="let user" class="p-3 text-center">
+            <button (click)="openEditUserModal(user)" 
+              class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteUser(user.userId!)" 
+              class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-3 py-1 rounded-md hover:bg-red-600 transition ml-2">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        
+        <!--  Table Header -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <!--  Table Rows -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <!--  Pagination -->
+    <mat-paginator class="mt-4" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <!--  User Creation Form -->
+  <div *ngIf="activeSection === 'create'" class="bg-white shadow-lg rounded-lg p-6 mt-6">
+    <h2 class="text-xl font-semibold text-[#4B0082] mb-4">Create New User</h2>
+    <div *ngIf="errorMessage" class="col-span-2 text-red-500 mt-2">
+      <span>{{ errorMessage }}</span>
+    </div>
+  
+    <form (ngSubmit)="createUser()" #userForm="ngForm">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="name" class="block text-gray-700 font-medium mb-1">Name <span class="text-red-500">*</span></label>
+          <input id="name" type="text" [(ngModel)]="newUser.name" name="name" required #nameModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="nameModel.invalid && nameModel.touched"
+            placeholder="Enter name">
+        </div>
+  
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-1">Email <span class="text-red-500">*</span></label>
+          <input id="email" type="email" [(ngModel)]="newUser.email" name="email" required #emailModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="emailModel.invalid && emailModel.touched"
+            placeholder="Enter email">
+        </div>
+  
+        <div>
+          <label for="designation" class="block text-gray-700 font-medium mb-1">Designation <span class="text-red-500">*</span></label>
+          <input id="designation" type="text" [(ngModel)]="newUser.designation" name="designation" required #designationModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="designationModel.invalid && designationModel.touched"
+            placeholder="Enter designation">
+        </div>
+        <div>
+          <label for="skill" class="block text-gray-700 font-medium mb-1">Skill <span class="text-red-500">*</span></label>
+          <input id="skill" type="text" [(ngModel)]="newUser.skill" name="skill" required #skillModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="skillModel.invalid && skillModel.touched"
+            placeholder="Enter Skill">
+        </div>
+
+        <div>
+          <label for="reportingManager" class="block text-gray-700 font-medium mb-1">Reporting Manager <span class="text-red-500">*</span></label>
+          <input id="reportingManager" type="text" [(ngModel)]="newUser.reportingManager" name="reportingManager" required #managerModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="managerModel.invalid && managerModel.touched"
+            placeholder="Enter manager name">
+        </div>
+  
+        <div>
+          <label for="experience" class="block text-gray-700 font-medium mb-1">Experience <span class="text-red-500">*</span></label>
+          <input id="experience" type="number" [(ngModel)]="newUser.experience" name="experience" required #experienceModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="experienceModel.invalid && experienceModel.touched"
+            placeholder="Enter experience">
+        </div>
+  
+        <div>
+          <label for="roleId" class="block text-gray-700 font-medium mb-1">Role <span class="text-red-500">*</span></label>
+          <select id="roleId" [(ngModel)]="newUser.roleId" name="roleId" required #roleModel="ngModel"
+            class="border p-2 rounded-lg w-full"
+            [class.border-red-500]="roleModel.invalid && roleModel.touched">
+            <option *ngFor="let role of roles" [value]="role.roleId">
+              {{ role.roleName }}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="userForm.invalid" 
+      class="mt-4 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-lg hover:bg-violet-700 transition flex items-center gap-2">
+      <mat-icon>add</mat-icon> Add
+    </button>
+    
+    </form>
+  </div>
+  
+  
+  <!--  Edit User Modal -->
+  <div *ngIf="showEditModal"  
+    class="fixed top-40 left-1/2 transform -translate-x-1/2 bg-white p-5 rounded-lg shadow-lg w-80 sm:w-96 border border-gray-300 max-h-96 overflow-y-auto">
+    
+    <h2 class="text-lg font-semibold text-[#9b6fa5] mb-4">Edit User</h2>
+
+    <form (ngSubmit)="updateUser()">
+      
+      <!--  Skill (Required) -->
+      <div class="mb-2">
+        <label for="edit-skill" class="block text-gray-700 font-medium">
+          Skill 
+        </label>
+        <input id="edit-skill" type="text" [(ngModel)]="editingUser.skill" name="skill" required
+          class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-violet-500"
+          placeholder="Enter Skill">
+      </div>
+
+      <!--  Role Selection (Dropdown) - Required -->
+      <div class="mb-2">
+        <label for="edit-role" class="block text-gray-700 font-medium">
+          Role <span class="text-red-500">*</span>
+        </label>
+        <select id="edit-role" [(ngModel)]="editingUser.roleId" name="roleId" required
+          class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-violet-500">
+          <option *ngFor="let role of roles" [value]="role.roleId">
+            {{ role.roleName }}
+          </option>
+        </select>
+      </div>
+
+      <!--  Buttons -->
+      <div class="flex justify-end gap-2 mt-3">
+        <button type="button" (click)="closeEditModal()"
+          class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-3 py-1 rounded hover:bg-gray-600 transition">
+          Cancel
+        </button>
+        <button type="submit"
+          class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-3 py-1 rounded hover:bg-violet-700 transition">
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

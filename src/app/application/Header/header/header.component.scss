@@ -1,0 +1,32 @@
+.custom-badge .mat-badge-content{
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
+  .custom-badge .mat-icon{
+    font-size: 32px;
+    width: 32px;
+  
+    height: 32px;
+  }
+  
+  a{
+    &.active{
+      color: #7d00fa;
+    }
+  }
+
+ 
+  .curved-logo-container {
+    width: 170px;
+    height: 100%;
+    background: white;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    clip-path: ellipse(80% 100% at 0% 50%);
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    left: 0;
+  }

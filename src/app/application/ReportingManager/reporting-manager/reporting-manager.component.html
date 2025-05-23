@@ -1,0 +1,14 @@
+<!-- Main Layout Component HTML -->
+<div class="flex h-[calc(100vh-4rem)]">
+  <!-- Sidebar with dynamic width -->
+  <div [ngClass]="isExpanded ? 'w-[20%] min-w-[180px] max-w-[300px]' : 'w-[80px]'"
+       class="bg-gray-800 text-white fixed top-10 left-0 h-[calc(100vh-4rem)] transition-all duration-300">
+    <app-dashboard [isExpanded]="isExpanded" (toggleSidebar)="toggleSidebar()"></app-dashboard>
+  </div>
+  
+  <!-- Main content area with dynamic margin -->
+  <div [ngClass]="isExpanded ? 'ml-[20%]' : 'ml-[80px]'" 
+       class="flex-1 p-6 py-10 px-5 overflow-auto transition-all duration-300">
+    <router-outlet></router-outlet>
+  </div>
+</div>

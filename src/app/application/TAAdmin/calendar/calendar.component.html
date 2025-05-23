@@ -1,0 +1,33 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5] mb-2 text-center">Interview Calendar</h2>
+    <div class="relative">
+      <button mat-icon-button (click)="toggleLegend()">
+        <mat-icon style="color: #6f42c1;">help_outline</mat-icon>
+      </button>
+
+      <!-- Legend Box positioned to the left of the icon -->
+      <div *ngIf="showLegend" class="status-legend-rounded left-box">
+        <div class="status-pill" style="background-color: #6f42c1;">Scheduled</div>
+        <div class="status-pill" style="background-color: #f80606;">Cancelled</div>
+      </div>
+    </div>
+  </div>
+  
+
+  <full-calendar [options]="calendarOptions"></full-calendar>
+
+  <!-- Popup for Interview Details -->
+  <div *ngIf="isPopupOpen" class="popup-overlay">
+    <div class="popup-content">
+      <h3>Interview Details</h3>
+      <p><strong>Panel Member:</strong> {{ selectedInterview?.panelMember }}</p>
+      <p><strong>Candidate:</strong> {{ selectedInterview?.candidateName }}</p>
+      <p><strong>Status:</strong> {{ selectedInterview?.status }}</p>
+      <p><strong>Start Time:</strong> {{ selectedInterview?.startTime | date:'short' }}</p>
+      <p><strong>End Time:</strong> {{ selectedInterview?.endTime | date:'short' }}</p>
+      
+      <button class="close-popup-btn"(click)="closePopup()">Close</button>
+    </div>
+  </div>
+</div> <!-- Close calendar-container here -->

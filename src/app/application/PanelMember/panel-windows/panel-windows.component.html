@@ -1,0 +1,57 @@
+<div class="dashboard p-6 bg-gray-100 min-h-screen">
+  <!-- Header -->
+  <h2 class="text-3xl font-semibold text-[#9b6fa5] mb-6">Panel Windows</h2>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table mat-table [dataSource]="dataSource" matSort class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+
+      <!-- Panel Window Name Column -->
+      <ng-container matColumnDef="panelWindowName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Panel Name
+        </th>
+        <td mat-cell *matCellDef="let panel" class="px-6 py-4 text-gray-700">
+          {{ panel.panelWindowName }}
+        </td>
+      </ng-container>
+
+      <!-- Start Date Column -->
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Start Date
+        </th>
+        <td mat-cell *matCellDef="let panel" class="px-6 py-4 text-gray-700">
+          {{ panel.startDate | date:'shortDate' }}
+        </td>
+      </ng-container>
+
+      <!-- End Date Column -->
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          End Date
+        </th>
+        <td mat-cell *matCellDef="let panel" class="px-6 py-4 text-gray-700">
+          {{ panel.endDate | date:'shortDate' }}
+        </td>
+      </ng-container>
+
+      <!-- Skill Set Column -->
+      <ng-container matColumnDef="skillSet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Skill Set
+        </th>
+        <td mat-cell *matCellDef="let panel" class="px-6 py-4 text-gray-700">
+          {{ panel.skillSet }}
+        </td>
+      </ng-container>
+
+      <!-- Header & Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

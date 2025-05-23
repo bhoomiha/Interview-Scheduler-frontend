@@ -1,0 +1,29 @@
+<div class="flex h-screen bg-gray-100 py-5">
+  <!-- Sidebar with dynamic width based on isExpanded state -->
+  <aside [ngClass]="isExpanded ? 'w-20 sm:w-64' : 'w-10 sm:w-20'"
+    class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white flex flex-col p-4 shadow-lg transition-all duration-300">
+
+    <!-- Dashboard header with clickable icon -->
+    <h2 class="font-bold mb-6 text-white flex items-center cursor-pointer"  (click)="onToggleSidebar()" 
+    (keydown.enter)="onToggleSidebar()" 
+    (keydown.space)="onToggleSidebar()" 
+    tabindex="0">
+      <span class="material-icons mr-2">dashboard</span>
+      <span class="text-2xl" *ngIf="isExpanded">Dashboard</span>
+    </h2>
+  
+      <nav class="space-y-4">
+        <a routerLink="/reporting-manager/team-members" 
+           class="flex items-center px-4 py-2 rounded-lg hover:bg-[#9b6fa5] transition">
+          <span class="material-icons mr-3">group</span>
+        <span *ngIf="isExpanded">All Slots</span>
+        </a>
+        
+        <a routerLink="/reporting-manager/reporting-manager-calendar" 
+           class="flex items-center px-4 py-2 rounded-lg hover:bg-[#9b6fa5] transition">
+          <span class="material-icons mr-3">event</span> 
+          <span *ngIf="isExpanded">Calendar</span>
+        </a>
+      </nav>
+    </aside>
+  </div>

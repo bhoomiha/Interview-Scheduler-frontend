@@ -1,0 +1,82 @@
+<div class="max-w-md mx-auto p-7 bg-white rounded-lg shadow-md border border-gray-300">
+  <!-- Header Section -->
+  <div class="calendar-header mb-4">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5] text-center">
+      Create Slot
+    </h2>
+  </div>
+
+  <form [formGroup]="createSlotForm" (ngSubmit)="submitForm()">
+    <!-- Panel Name Dropdown -->
+    <div class="mb-4">
+      <label for="panelName" class="block font-semibold text-[#9b6fa5] mb-2">
+        Panel Name:
+      </label>
+      <select formControlName="panelName" id="panelName"
+        class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]">
+        <option *ngFor="let panel of panelWindows" [value]="panel.panelWindowId">
+          {{ panel.panelWindowName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Skill Set -->
+    <div class="mb-4">
+      <label class="block font-semibold text-[#9b6fa5] mb-2">Skill Set:</label>
+      <input type="text" formControlName="skillSet"
+        class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-[#9b6fa5]" [disabled]="true" />
+    </div>
+
+    <!-- Date Field -->
+    <div class="mb-4">
+      <label for="date" class="block font-semibold text-[#9b6fa5] mb-2">Select Date:</label>
+      <input type="date" id="date" formControlName="date"
+        class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]"
+        [attr.min]="availableDates?.length ? availableDates[0] : null"
+        [attr.max]="availableDates?.length ? availableDates[availableDates.length - 1] : null"/>
+    </div>  
+
+    
+    <!-- Time Selection -->
+    <div class="flex space-x-3 mb-4">
+      <!-- Start Time -->
+      <div class="w-1/2">
+        <label for="startTime" class="block font-semibold text-[#9b6fa5] mb-2">Start Time:</label>
+        <select id="startTime" formControlName="startTime" (change)="updateEndTimeOptions()"
+          class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]">
+          <option *ngFor="let time of availableTimeSlots" [value]="time">
+            {{ time }}
+          </option>
+        </select>
+      </div>
+      
+      <!-- End Time -->
+      <div class="w-1/2">
+        <label for="endTime" class="block font-semibold text-[#9b6fa5] mb-2">End Time:</label>
+        <select id="endTime" formControlName="endTime"
+          class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]">
+          <option *ngFor="let time of filteredEndTimes" [value]="time">
+            {{ time }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Validation Message -->
+    <div *ngIf="formSubmitted && createSlotForm.invalid" class="text-red-600 text-center font-semibold mb-4">
+       Please fill all required fields.
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="slotCreatedMessage" class="text-green-600 text-center font-semibold mb-4">
+      {{ slotCreatedMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+      class="w-full py-3 bg-gradient-to-r from-[#9b6fa5] to-[#7a4c8f] text-white rounded-lg hover:from-[#7a4c8f] hover:to-[#5a3570] transition duration-300"
+      [disabled]="!createSlotForm.valid">
+      Create Slot
+    </button>
+  </form>
+</div>

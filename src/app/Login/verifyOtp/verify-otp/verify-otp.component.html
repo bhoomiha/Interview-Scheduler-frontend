@@ -1,0 +1,54 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="w-[400px] bg-white p-6 rounded-lg shadow-lg text-center">
+    <!-- Lock Icon -->
+    <div class="flex justify-center mb-4">
+      <div class="bg-violet-100 p-3 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 11V7a4 4 0 0 1 8 0v4M8 11V7a4 4 0 0 1 8 0v4m-8 0h8m-8 0H4m4 0v6a4 4 0 1 0 8 0v-6">
+          </path>
+        </svg>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-2 rounded mb-4">
+      {{ errorMessage }}
+    </div>
+
+    <h2 class="text-2xl font-bold mb-2 text-gray-700">Two-Step Verification</h2>
+    <p class="text-gray-600 mb-4">
+      Enter the OTP sent to your email: <strong>{{ getMaskedEmail(email) }}</strong>
+    </p>
+
+    <!-- OTP Form -->
+    <form (submit)="verifyOtp(); $event.preventDefault()">
+      <div class="mb-4">
+        <label for="otp" class="block text-sm font-medium text-gray-600">
+          OTP Code <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="otp"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-violet-300 text-center text-lg tracking-widest"
+          [(ngModel)]="otp"
+          name="otp"
+          [disabled]="loading || otpExpired"
+          required
+        />
+      </div>
+
+      <p class="text-sm text-gray-600 mb-2">
+        OTP expires in: 
+        <span class="font-semibold text-red-500">{{ timerDisplay }}</span>
+      </p>
+
+      <button
+        type="submit"
+        class="w-full bg-gradient-to-b from-[#9b6fa5] to-[#7a4c8f] text-white py-2 rounded-lg hover:bg-gradient-to-b hover:from-[#7a4c8f] hover:to-[#9b6fa5] transition duration-300"
+        [disabled]="loading || otpExpired"
+      >
+        {{ loading ? 'Verifying...' : 'Verify OTP' }}
+      </button>
+    </form>
+  </div>
+</div>

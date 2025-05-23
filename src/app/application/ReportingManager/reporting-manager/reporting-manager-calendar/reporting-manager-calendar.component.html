@@ -1,0 +1,18 @@
+<div class="calendar-container">
+    <div class="calendar-header">
+        <h2 class="text-3xl font-semibold text-[#7a4c8f] mb-2 text-center">Panel Calendar</h2>
+    </div>
+    <full-calendar [options]="calendarOptions"></full-calendar>
+</div>
+
+<!-- Popup for Interview Details -->
+<div *ngIf="isPopupOpen" class="popup-overlay">
+    <div class="popup-content">
+        <h1 class="font-bold text-center text-2xl">Slot Details</h1>
+        <p><strong>PanelMember:</strong> {{ selectedSlot?.panelMemberName }}</p>
+        <p><strong>Status:</strong> {{ selectedSlot?.status }}</p>
+        <p><strong>Start Time:</strong> {{ selectedSlot?.startTime | date:'short' }}</p>
+        <p><strong>End Time:</strong> {{ selectedSlot?.endTime | date:'short' }}</p>
+        <button (click)="closePopup()">Close</button>
+    </div>
+</div>

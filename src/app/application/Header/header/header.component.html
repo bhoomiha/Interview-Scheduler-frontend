@@ -1,0 +1,76 @@
+<header
+  class="shadow-lg w-full h-15 fixed top-0 z-50 bg-gradient-to-b from-[#9b6fa5] to-[#7a4c8f] text-white flex items-center"
+>
+  <!-- Curved Logo Section  -->
+  <div
+    class="relative w-16 h-full bg-white flex items-center curved-logo-container shadow-md"
+  >
+    <img
+      routerLink="/"
+      src="/images/logo.png"
+      alt="Company Logo"
+      class="h-33 w-33 object-contain ml-[10px]"
+    />
+  </div>
+
+  <!-- Title Section -->
+  <div
+    class="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold tracking-wide"
+  >
+    Interview Scheduler
+  </div>
+
+  <div class="ml-auto pr-6 relative">
+    <ng-container *ngIf="isLoggedIn(); else loginTemplate">
+      <span *ngIf="userName()" class="mr-4 font-semibold">
+        {{ getGreeting() }}, {{ userName() }}
+      </span>
+
+      <!-- View Profile Button -->
+      <button
+        (click)="toggleProfilePopup()"
+        class="px-4 py-1 mr-4 border border-white rounded-full hover:bg-white hover:text-[#7a4c8f] items-center gap-2 transition text-white"
+      >
+        View Profile
+      </button>
+
+      <!-- Profile Popup -->
+      <div
+        *ngIf="showProfilePopup()"
+        class="absolute right-0 top-full mt-2 w-80 bg-white text-black rounded-lg shadow-xl p-4 z-50"
+      >
+        <h3 class="font-bold mb-2" style="color: #9b6fa5">User Profile</h3>
+        <div *ngIf="userProfile">
+          <p><strong>Name:</strong> {{ userProfile.name }}</p>
+          <p><strong>Email:</strong> {{ userProfile.email }}</p>
+          <p><strong>Designation:</strong> {{ userProfile.designation }}</p>
+          <p><strong>Experience:</strong> {{ userProfile.experience }} years</p>
+          <p *ngIf="userProfile.skill">
+            <strong>Skill:</strong> {{ userProfile.skill }}
+          </p>
+          <p>
+            <strong>Reporting Manager:</strong>
+            {{ userProfile.reportingManager }}
+          </p>
+        </div>
+        <button
+          (click)="toggleProfilePopup()"
+          class="mt-3 px-4 py-1 text-sm bg-[#9b6fa5] text-white rounded hover:bg-[#7a4c8f] transition"
+        >
+          Close
+        </button>
+      </div>
+      <button
+        (click)="logout()"
+        class="px-5 py-1.5 border border-white text-white rounded-full hover:bg-white hover:text-indigo-600 transition duration-300 shadow-lg hover:shadow-indigo-500/50 font-medium"
+      >
+        Logout
+      </button>
+    </ng-container>
+
+    <!-- If not logged in, show Login button -->
+    <ng-template #loginTemplate>
+      <!-- Add login button or content here -->
+    </ng-template>
+  </div>
+</header>

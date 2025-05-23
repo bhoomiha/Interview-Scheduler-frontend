@@ -1,0 +1,249 @@
+<div class="dashboard p-6 bg-gray-100 min-h-screen">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6 relative">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5]">Available Slots</h2>
+  
+    <!-- Help Icon (Always Visible) -->
+    <button mat-icon-button matTooltip="Click to view status legend"
+            (click)="toggleLegend()" class="absolute right-0 top-0 z-50 bg-white p-1 rounded-full shadow-lg">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+  </div>
+  
+  <!-- Status Legend (Displays All Statuses on Click) -->
+  <div *ngIf="showLegend" class="absolute top-16 right-10 p-4 bg-white border border-gray-300 rounded-lg shadow-md z-60">
+    <div class="flex justify-between items-center">
+      <h2 class="text-lg font-semibold">Status Legend</h2>
+  
+      <!-- Close Button -->
+      <button (click)="toggleLegend()" class="text-gray-500 hover:text-gray-800">
+        ✖
+      </button>
+    </div>
+  
+    <div class="flex flex-col gap-3 mt-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-gray-200 rounded-full"></span>
+        <span class="text-sm font-medium text-gray-800">Initiated</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-green-200 rounded-full"></span>
+        <span class="text-sm font-medium text-green-800">Available</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-yellow-200 rounded-full"></span>
+        <span class="text-sm font-medium text-yellow-800">InProgress</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-purple-200 rounded-full"></span>
+        <span class="text-sm font-medium text-purple-800">Scheduled</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-red-200 rounded-full"></span>
+        <span class="text-sm font-medium text-red-800">Cancelled</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-4 h-4 bg-orange-200 rounded-full"></span>
+        <span class="text-sm font-medium text-orange-800">Request Cancellation</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Filters Section -->
+  <div
+    class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-4 mb-4"
+  >
+    <div class="flex flex-col md:flex-row items-center gap-4">
+      <!-- Start Date Filter -->
+<div class="flex flex-col">
+  <label for="startDate" class="text-sm font-semibold text-[#7a4c8f] mb-1">Start Date</label>
+  <mat-form-field appearance="outline" class="w-40">
+    <input matInput id="startDate" [matDatepicker]="startPicker" [(ngModel)]="startDate"
+           (dateChange)="applyFilter()" class="text-[#7a4c8f] placeholder-[#c8a5d5]">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<!-- End Date Filter -->
+<div class="flex flex-col">
+  <label for="endDate" class="text-sm font-semibold text-[#7a4c8f] mb-1">End Date</label>
+  <mat-form-field appearance="outline" class="w-40">
+    <input matInput id="endDate" [matDatepicker]="endPicker" [(ngModel)]="endDate"
+           (dateChange)="applyFilter()" class="text-[#7a4c8f] placeholder-[#c8a5d5]">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+</div>
+      <!-- Reset Button -->
+      <button
+        class="px-3 py-2 bg-[#eae2ed] text-[#7a4c8f] rounded-md hover:bg-[#d6c5e0] transition duration-300"
+        (click)="startDate = null; endDate = null; applyFilter()"
+      >
+        Reset Dates
+      </button>
+    </div>
+    
+<!-- Status Filter with Label -->
+<div class="flex flex-col">
+  <label for="statusFilter" class="text-sm font-semibold text-[#7a4c8f] mb-1">Select Status</label>
+  <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="applyFilter()"
+          class="p-3 w-48 border border-purple-300 rounded-lg shadow-md bg-white text-[#7a4c8f] 
+                 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:bg-[#f5ebf7] transition duration-300">
+    <option value="All" class="font-medium border-b border-gray-300 pb-2">All</option>
+    <option *ngFor="let status of statuses" [value]="status"
+            class="text-[#7a4c8f] font-medium border-b border-gray-300 pb-2 hover:bg-[#e2cbe9]">
+      {{ status }}
+    </option>
+  </select>
+</div>
+      
+  </div>
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
+    >
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left"
+        >
+          Date
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let slot"
+          class="border-r border-gray-300 px-6 py-4 text-gray-700"
+        >
+          {{ slot.date | date : "yyyy-MM-dd" }}
+        </td>
+      </ng-container>
+      <!-- Start Time Column -->
+      <ng-container matColumnDef="startTime">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left"
+        >
+          Start Time
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let slot"
+          class="border-r border-gray-300 px-6 py-4 text-gray-700"
+        >
+          {{ slot.startTime }}
+        </td>
+      </ng-container>
+      <!-- End Time Column -->
+      <ng-container matColumnDef="endTime">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left"
+        >
+          End Time
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let slot"
+          class="border-r border-gray-300 px-6 py-4 text-gray-700"
+        >
+          {{ slot.endTime }}
+        </td>
+      </ng-container>
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left"
+        >
+          Status
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let slot"
+          class="border-r border-gray-300 px-6 py-4 text-gray-800 text-center"
+        >
+          <span
+            class="inline-block px-2 py-1 rounded-full text-sm font-medium cursor-pointer"
+            matTooltip="{{ getStatusTooltip(slot.status) }}"
+            [ngClass]="{
+              'bg-gray-200 text-gray-800': slot.status === 'Initiated',
+              'bg-green-200 text-green-800': slot.status === 'Available',
+              'bg-yellow-200 text-yellow-800': slot.status === 'InProgress',
+              'bg-purple-200 text-purple-800': slot.status === 'Scheduled',
+              'bg-red-200 text-red-800': slot.status === 'Cancelled',
+              'bg-orange-200 text-orange-800':
+                slot.status === 'Request Cancellation'
+            }"
+          >
+            {{ slot.status }}
+          </span>
+        </td>
+      </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="!bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4"
+        >
+          Actions
+        </th>
+        <td mat-cell *matCellDef="let slot" class="px-6 py-4 text-center">
+          <button
+            *ngIf="canRequestCancellation(slot)"
+            (click)="requestCancellation(slot)"
+            class="px-3 py-1 rounded-lg bg-[#7a4c8f] text-white hover:bg-[#5a3570] transition duration-300"
+          >
+            Request Cancellation
+          </button>
+          <button
+            *ngIf="!canRequestCancellation(slot) && canCancel(slot)"
+            (click)="cancelSlot(slot)"
+            class="px-3 py-1 rounded-lg bg-[#7a4c8f] text-white hover:bg-[#5a3570] transition duration-300"
+          >
+            Cancel
+          </button>
+          <span
+            *ngIf="slot.status === 'Request Cancellation'"
+            class="text-[#7a4c8f] font-medium"
+          >
+            Cancellation Requested
+          </span>
+          <span
+            *ngIf="
+              !canCancel(slot) &&
+              slot.status !== 'Request Cancellation' &&
+              !canRequestCancellation(slot)
+            "
+            class="text-gray-400 italic"
+          >
+            No actions
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Header & Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <!-- Paginator -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

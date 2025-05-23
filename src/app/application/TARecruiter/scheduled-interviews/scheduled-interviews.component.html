@@ -1,0 +1,118 @@
+<div class="dashboard px-6  bg-50  min-h-screen text-sm text-gray-600 ml-4">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5]">Scheduled Interviews</h2>
+    </div>
+  <!-- interviews Table -->
+  <table class="w-full border-collapse border border-gray-100  rounded-lg">
+    <thead >
+      <tr>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">PanelName</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">Candidate</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-center font-medium">Date</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium w-40">StartTime</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">EndTime</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">Reporting Manager</th>
+        <th class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">Status</th>  
+      </tr>
+      <tr class="bg-white-100 border-b border-gray-300 ">
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <input type="text" [(ngModel)]="filters.name" placeholder="Search Name" class="p-1 border border-purple-300 rounded w-full " (input)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <input type="text" [(ngModel)]="filters.name" placeholder="Search Name" class="p-1 border border-purple-300 rounded w-full" (input)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <input type="date" [(ngModel)]="filters.date" class="p-1 border border-purple-300 rounded w-full" (change)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <div class="flex">
+            <select [(ngModel)]="filters.startHour" class="p-1 border border-purple-300 rounded w-13" (change)="applyFilters()">
+              <option value="">HH</option>
+              <option *ngFor="let hour of hoursList" [value]="hour" >{{ hour }}</option>
+            </select>
+            <select [(ngModel)]="filters.startMinute" class="p-1 border border-purple-300 rounded w-14 " (change)="applyFilters()">
+              <option value="">MM</option>
+              <option *ngFor="let minute of minutesList" [value]="minute" class="text-black">{{ minute }}</option>
+            </select>
+          </div>
+        </th>
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <div class="flex">
+            <select [(ngModel)]="filters.endHour" class="p-1 border border-purple-300 rounded w-13" (change)="applyFilters()">
+              <option value="">HH </option>
+              <option *ngFor="let hour of hoursList" [value]="hour" class="text-black" >{{ hour }}</option>
+            </select>
+            <select [(ngModel)]="filters.endMinute" class="p-1 border border-purple-300 rounded w-14" (change)="applyFilters()">
+              <option value="">MM</option>
+              <option *ngFor="let minute of minutesList" [value]="minute" class="text-black">{{ minute }}</option>
+            </select>
+          </div>
+        </th>
+        <th class="p-2 !border-r border-gray-300 font-normal">
+          <input type="text" [(ngModel)]="filters.name" placeholder="Search Name" class="p-1 border border-purple-300 rounded w-full" (input)="applyFilters()" />
+        </th> 
+        <th class="p-2 font-normal">
+          <div class="flex items-center space-x-1">
+            <select
+              [(ngModel)]="filters.status"
+              class=" p-1 border rounded w-28 border-purple-300"
+              (change)="applyFilters()"
+            >
+              <option value="" >All</option>
+              <option value="Request Cancellation" class="text-black">RequestCancellation</option>
+              <option value="Scheduled" class="text-black">Scheduled</option>
+              <option value="Cancelled" class="text-black">Cancelled</option>
+            </select>
+        
+            <button
+              (click)="resetFilters()"
+              class="text-xs bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] border hover:bg-red-600 text-white px-2 py-1 rounded font-normal"
+              
+            >
+              Reset
+            </button>
+          </div>
+        </th>        
+      </tr>
+    </thead>
+    <tbody class="bg-white-100">
+      <tr *ngFor="let interview of interviews | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }" class="p-6 text-center text-gray-800 bg-gray-100">
+        <td class="p-4 border-r border-b  border-gray-300">{{ interview.panelMemberName }}</td>
+        <td class="p-2 border-r border-b border-gray-300">{{ interview.candidateName }}</td>
+        <td class="p-2 border-r border-b border-gray-300">{{ interview.date | date: 'dd-MM-yyyy' }}</td>
+        <td class="p-2 border-r border-b border-gray-300">{{ interview.startTime }}</td>
+        <td class="p-2 border-r border-b border-gray-300">{{ interview.endTime }}</td>
+        <td class="p-2 border-r border-b border-gray-300">{{ interview.reportingManager }}</td> 
+        <td class="p-2 border-b border-gray-300">
+          <span
+            class="inline-block px-2 py-1 rounded-full text-sm font-medium cursor-pointer"
+            [title]="getStatusTooltip(interview.status)"
+            [ngClass]="{
+              'bg-green-200 text-green-800': interview.status === 'Available',
+              'bg-purple-200 text-purple-800': interview.status === 'Scheduled',
+              'bg-red-200 text-red-800': interview.status === 'Cancelled',
+              'bg-orange-200 text-orange-800': interview.status === 'Request Cancellation'
+            }"
+          >
+            {{ interview.status }}
+          </span>
+        </td>
+        
+        
+      </tr>
+      <tr *ngIf="interviews.length === 0">
+        <td colspan="6" class="text-center text-red-600 py-4 font-semibold">
+          No interviews found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Pagination Controls -->
+<div class="flex justify-end mt-4">
+  <pagination-controls (pageChange)="currentPage = $event" ></pagination-controls>
+</div>
+  <!-- Error Message -->
+  <!-- <div *ngIf="errorMessage" class="error-message text-red-500 mb-4">
+    {{ errorMessage }}
+  </div> -->
+</div>

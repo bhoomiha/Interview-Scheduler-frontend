@@ -1,0 +1,206 @@
+<div class="dashboard p-6 bg-gray-100 min-h-screen">
+  <h2 class="text-3xl font-semibold text-[#9b6fa5] mb-4">Map Panel Members</h2>
+
+  <!-- Search & Filters Wrapper -->
+  <div class="flex flex-wrap items-center justify-between bg-gray-100 p-4 rounded-lg shadow-md">
+    <div class="relative flex items-center">
+      <!-- Search Icon -->
+      <span class="material-icons absolute left-3 text-gray-500">search</span>
+      <!-- Search Input Field -->
+      <input matInput [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()"
+        placeholder="Search by Name, Skill, or Designation"
+        class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9b6fa5]" />
+    </div>
+    <!-- Filter Button -->
+    <div class="relative ml-auto mt-4 md:mt-0">
+
+      <!-- Wrapper around the filter icon and popup -->
+      <div class="relative inline-block">
+        <!-- Filter Button -->
+        <button (click)="showFilters = !showFilters"
+          class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-2 py-1 rounded-md hover:from-[#7a4c8f] hover:to-[#5c3471] transition-shadow shadow-md hover:shadow-lg">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+
+        <!-- Horizontal Filter Popup Expanding to the Left -->
+        <div *ngIf="showFilters" class="absolute bottom-0  right-full ml-3 bg-white border border-[#9b6fa5] rounded-lg shadow-xl px-2 py-2 z-50
+               flex items-center gap-4 animate-fade-in min-w-[460px] max-w-full">
+
+          <!-- Experience -->
+          <div class="flex flex-col items-start text-sm gap-1">
+            <label class="text-[#9b6fa5] font-medium">Experience:</label>
+            <div class="flex gap-1 flex-col">
+              <input type="number" [(ngModel)]="minExperience" (ngModelChange)="applyFilters()"
+                class="w-16 p-1 border border-[#9b6fa5] rounded-md text-sm" placeholder="Min" />
+              <input type="number" [(ngModel)]="maxExperience" (ngModelChange)="applyFilters()"
+                class="w-16 p-1 border border-[#9b6fa5] rounded-md text-sm" placeholder="Max" />
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="flex flex-col items-start text-sm gap-1">
+            <label class="text-[#9b6fa5] font-medium">Skills:</label>
+            <mat-form-field appearance="fill" class="!w-40 !h-16  !border-[#9b6fa5] rounded-md !py-0">
+              <mat-label>Filter by Skills</mat-label>
+              <mat-select multiple [(ngModel)]="selectedSkillFilters" class="!p-0 !w-35 !h-0" (ngModelChange)="applyFilters()">
+
+                <!-- Search box -->
+                  <input type="text" [(ngModel)]="skillSearchText" placeholder="Search skill..."
+                    class="w-full px-2 py-1 border rounded-sm focus:outline-none" (click)="$event.stopPropagation()" />
+              
+
+                <!-- Always render all skills but conditionally hide -->
+                <mat-option *ngFor="let skill of getUniqueSkills()" [value]="skill"
+                  [style.display]="skill.toLowerCase().includes(skillSearchText.toLowerCase()) ? 'flex' : 'none'">
+                  {{ skill }}
+                </mat-option>
+
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <div class="flex flex-col items-start mb-1  text-sm gap-1">
+            <label class="text-[#9b6fa5] font-medium flex flex-col">Level:
+              <select [(ngModel)]="selectedLevelFilter" (ngModelChange)="applyFilters()"
+                class="p-1 border border-[#9b6fa5] rounded-md mt-1 w-24 text-sm">
+                <option value="">All</option>
+                <option *ngFor="let level of Levels" [value]="level">{{ level }}</option>
+              </select>
+            </label>
+
+            <div class="flex items-center gap-1 mt-1 p-1 ">
+              <label class="text-sm text-[#9b6fa5]">
+                <input type="checkbox" class="" [(ngModel)]="showUnmappedOnly" (ngModelChange)="applyFilters()">
+                Unmapped </label>
+            </div>
+          </div>
+
+
+          <!-- Unmapped -->
+
+          <!-- Reset Button -->
+          <button (click)="resetFilters()"
+            class="py-2 px-4 mt-12 rounded-md bg-[#9b6fa5] text-white text-sm hover:bg-[#804e93] transition">
+            Reset
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Panel Members Table (Updated to mat-table) -->
+  <div class="overflow-x-auto mt-4">
+    <div *ngIf="dataSource.filteredData.length === 0" class="p-6 text-center text-gray-600">
+      No matching results found
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort
+      class="w-full border-collapse !border border-gray-300 shadow-md rounded-lg">
+      <!-- Select Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 text-left">
+          <div class="flex flex-col leading-tight mt-2">
+            <span>{{ selectedCount }} Selected</span>
+          </div>
+          <mat-checkbox [checked]="areAllFilteredSelected()" (change)="toggleSelectAllFiltered($event)" color="black">
+          </mat-checkbox>
+        </th>
+
+        <td mat-cell *matCellDef="let member" class="p-2 border text-center">
+          <mat-checkbox [(ngModel)]="member.selected" (change)="onMemberCheckboxChange()" color="accent"></mat-checkbox>
+        </td>
+      </ng-container>
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">
+          Name
+          <button mat-button (click)=" toggleSortOrder()"
+            class="ml-2 px-2 py-1 bg-white text-[#7a4c8f] border border-[#7a4c8f] rounded hover:bg-[#7a4c8f] hover:text-white transition">
+            {{ sortAscending ? 'A-Z' : 'Z-A' }}
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">{{ member.name }}</td>
+      </ng-container>
+
+      <!-- Other columns (Email, Experience, Skill Set, etc.) -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">Email</th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">{{ member.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="experience">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">Experience</th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">{{ member.experience }} yrs</td>
+      </ng-container>
+
+      <ng-container matColumnDef="skillSet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">Skill</th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">{{ member.skillSet }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">Designation</th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">{{ member.designation }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="!border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-3 text-left">Current Level
+        </th>
+        <td mat-cell *matCellDef="let member" class="p-2 border">
+          <span class=" px-1 py-1 rounded text-white" [ngClass]="{
+              'bg-red-500': !member.level,
+              'bg-green-500': member.level === 'L1',
+              'bg-blue-500': member.level === 'L2',
+              'bg-yellow-500': member.level === 'L3'
+            }">
+            {{ member.level ? member.level : 'NotMapped' }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Table Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="mt-6 flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-md">
+    <!-- Left section: Label, Dropdown, Button -->
+    <div class="flex flex-wrap items-center gap-4">
+      <label class="font-medium text-gray-700">Select Level:
+
+        <select [(ngModel)]="selectedLevel"
+          class="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <option *ngFor="let level of interviewLevels" [value]="level">{{ level }}</option>
+        </select>
+      </label>
+
+      <button (click)="submitAllocation()"
+        class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:from-[#7a4c8f] hover:to-[#5c3471] transition-shadow shadow-md hover:shadow-lg">
+        Assign Level
+      </button>
+    </div>
+
+    <!-- Right section: Paginator -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+
+
+  <!-- Success/Error Messages -->
+  <p *ngIf="successMessage" class="mt-3 text-green-600 font-medium">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="mt-3 text-red-600 font-medium">{{ errorMessage }}</p>
+
+</div>

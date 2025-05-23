@@ -1,0 +1,41 @@
+.custom-form-field {
+    min-width: 0 !important;
+  
+    padding: 0 !important;
+    margin: 0 !important;
+  
+    .mat-mdc-form-field-infix {
+      padding: 0 !important;
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+  
+    .mdc-text-field {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+  }
+  
+  .custom-select {
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+  
+
+  /* Reusable class */
+::ng-deep .restricted-column {
+  max-width: 110px; /* Set a desired width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Apply the class to the specific columns */
+::ng-deep .mat-column-reportingManager,
+::ng-deep .mat-column-candidate,
+::ng-deep .mat-column-panelMemberName {
+  @extend .restricted-column;
+}
+
+  

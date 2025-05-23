@@ -1,0 +1,31 @@
+<div class="flex h-screen bg-gray-100 py-5">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#7a4c8f] text-white flex flex-col p-4 shadow-lg ">
+    <h2 class="text-2xl font-bold mb-6 text-white flex items-center bg-[#7a4c8f] py-3 px-4 rounded-md">
+      <span class="material-icons mr-2">dashboard</span> Dashboard
+    </h2>
+
+    <nav class="space-y-4">
+      <!-- All Panel Members -->
+      <a routerLink="/panel-member/get-slots" 
+         class="flex items-center px-4 py-2 rounded-lg bg-[#7a4c8f] hover:bg-[#5a3570] transition">
+        <span class="material-icons mr-3">event</span> All Slots
+      </a>
+
+      <a routerLink="/panel-member/panel-member-window" 
+         class="flex items-center px-4 py-2 rounded-lg bg-[#7a4c8f] hover:bg-[#5a3570] transition">
+        <span class="material-icons mr-3">view_week</span> Panel Windows
+      </a>
+
+      <a routerLink="/panel-member/panel-member-calendar" 
+         class="flex items-center px-4 py-2 rounded-lg bg-[#7a4c8f] hover:bg-[#5a3570] transition">
+        <span class="material-icons mr-3">calendar_today</span> Calendar
+      </a>
+
+      <a routerLink="/panel-member/slot-form" 
+         class="flex items-center px-4 py-2 rounded-lg bg-[#7a4c8f] hover:bg-[#5a3570] transition">
+        <span class="material-icons mr-3">alarm_add</span> Slot Form
+      </a>
+    </nav>
+  </aside>
+</div>

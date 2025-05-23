@@ -1,0 +1,91 @@
+<div class="dashboard p-2 sm:p-6 bg-gray-100 min-h-screen">
+  <!-- Header -->   
+  <h2 class="text-1xl sm:text-3xl font-semibold text-[#9b6fa5] mb-4">All Panel Members</h2>
+
+  <div class="flex flex-wrap items-center justify-between gap-160 bg-gray-100 p-4 rounded-lg shadow-md">
+    <!-- Search Box -->
+    <div class="relative w-full sm:max-w-sm">
+      <span class="material-icons absolute left-3 top-2.5 text-gray-500">search</span>
+      <input type="text" [(ngModel)]="filterValue" (keyup)="applyFilter()" placeholder="Search Panel Members"
+        class="w-full pl-10 pr-4 py-2  border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9b6fa5]" />
+    </div>
+  </div>  
+
+  <!-- Table -->
+  <div class="overflow-x-auto mt-4">
+    <div *ngIf="dataSource.filteredData.length === 0" class="p-6 text-center text-gray-600">
+      No matching results found
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="w-full border-collapse border  shadow-md rounded-lg">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Name
+        </th>
+        <td mat-cell *matCellDef="let member" class=" !border px-6 py-4 text-gray-700">
+          {{ member.name }}
+        </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Email
+        </th>
+        <td mat-cell *matCellDef="let member" class="!border px-6 py-4 text-gray-700">
+          {{ member.email }}
+        </td>
+      </ng-container>
+
+      <!-- Experience Column -->
+      <ng-container matColumnDef="experience">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Experience
+        </th>
+        <td mat-cell *matCellDef="let member" class="!border px-6 py-4 text-gray-700">
+          {{ member.experience }}
+        </td>
+      </ng-container>
+
+      <!-- Skill Column -->
+      <ng-container matColumnDef="skill">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Skill
+        </th>
+        <td mat-cell *matCellDef="let member" class=" !border px-6 py-4 text-gray-700">
+          {{ member.skillSet }}
+        </td>
+      </ng-container>
+
+      <!-- Designation Column -->
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          class="border !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left">
+          Designation
+        </th>
+        <td mat-cell *matCellDef="let member" class="!border px-6 py-4 text-gray-700">
+          {{ member.designation }}
+        </td>
+      </ng-container>
+
+      <!-- Header & Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <div class="w-full overflow-x-auto mt-4">
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    class="min-w-[320px] sm:min-w-0"
+  ></mat-paginator>
+</div>
+
+</div>

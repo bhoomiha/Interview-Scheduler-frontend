@@ -1,0 +1,55 @@
+<div class="flex h-screen bg-gray-100 py-5">
+  <!-- Sidebar -->
+  <div class="w-64 bg-[#7a4c8f] text-white flex flex-col p-4 shadow-lg ">
+    <h2 class="text-2xl font-bold mb-6 text-white flex items-center bg-[#7a4c8f] py-3 px-4 rounded-md">
+      <span class="material-icons mr-2">dashboard</span> Dashboard
+    </h2>
+
+    <!-- Navigation Tabs -->
+    <button class="w-full flex items-center px-4 py-2 rounded-lg hover:bg-[#5a3570] transition"
+      (click)="switchTab('upcoming')">
+      <span class="material-icons mr-3">event</span> Upcoming Interviews
+    </button>
+
+    <button class="w-full flex items-center px-4 py-2 mt-2 rounded-lg hover:bg-[#5a3570] transition"
+      (click)="switchTab('past')">
+      <span class="material-icons mr-3">history</span> Past Interviews
+    </button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6 relative">
+    <div class="bg-white shadow-lg rounded-lg p-6 relative">
+      <!-- Header with Profile Toggle -->
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl font-semibold text-[#9b6fa5]">Interview Schedule</h2>
+
+      </div>
+
+
+      <!-- Interview Table -->
+      <table class="w-full border-collapse rounded-lg overflow-hidden mt-4">
+        <thead>
+          <tr class="bg-gradient-to-b from-[#9b6fa5] to-[#7a4c8f] text-white">
+            <th class="px-6 py-3 text-left cursor-pointer" (click)="sortByDate()">Date</th>
+            <th class="px-6 py-3 text-left">Start Time</th>
+            <th class="px-6 py-3 text-left">End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let interview of filteredInterviews" class="border-b text-gray-800 hover:bg-gray-100">
+            <td class="px-6 py-3">{{ interview.date | date : 'dd-MM-yyyy' }}</td>
+            <td class="px-6 py-3">{{ interview.startTime }}</td>
+            <td class="px-6 py-3">{{ interview.endTime }}</td>
+          </tr>
+
+          <tr *ngIf="filteredInterviews.length === 0">
+            <td colspan="4" class="text-center text-gray-600 py-3">
+              No Interviews Found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

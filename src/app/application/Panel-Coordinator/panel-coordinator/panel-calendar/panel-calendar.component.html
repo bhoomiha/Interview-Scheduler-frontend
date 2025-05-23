@@ -1,0 +1,79 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5] mb-2 text-center">Panel Calendar</h2>
+  </div>
+
+  <full-calendar [options]="calendarOptions"></full-calendar>
+
+  <!-- Add New Event Popup -->
+  <div *ngIf="isPopupOpen" class="popup-overlay">
+    <div class="popup-content">
+      <h3>New Panel Allocation</h3>
+
+      <label>Panel Name:
+        <input type="text" [(ngModel)]="panelWindow.panelWindowName" placeholder="Enter Panel Name" class="input-field" >
+      </label>
+
+      <label>Start Date:
+        <input type="datetime" [(ngModel)]="panelWindow.startDate" class="input-field">
+      </label>
+
+      <label>End Date:
+        <input type="datetime" [(ngModel)]="panelWindow.endDate" class="input-field">
+      </label>
+
+      <label>Skill Set:
+        <input type="text" [(ngModel)]="panelWindow.skillSet" placeholder="Enter Required Skill Set" class="input-field">
+      </label>
+      <div class="popup-actions">
+        <button
+          class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:bg-purple-700 transition"
+          (click)="AllocatePanelWindow()">Save</button>
+        <button
+          class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:bg-purple-700 transition"
+          (click)="closePopup()">Cancel</button>
+      </div>
+
+      <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  
+
+  <div *ngIf="isWindowPopupOpen" class="popup-overlay">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
+      <h3 class="text-xl font-semibold mb-2">{{ selectedWindow?.panelWindowName }}</h3>
+      <p class="mb-1"><span class="font-medium">Skill Set:</span> {{ selectedWindow?.skillSet }}</p>
+      <p class="mb-1"><span class="font-medium">From:</span> {{ selectedWindow?.startTime | date: 'dd/MM/yyyy' }}</p>
+      <p class="mb-4"><span class="font-medium">To:</span> {{ selectedWindow?.endTime | date: 'dd/MM/yyyy' }}</p>
+  
+      <h4 class="text-lg font-semibold mb-2">Panel Members ({{ selectedWindow?.members?.length }})</h4>
+      <div class="max-h-48 overflow-y-auto rounded-md border border-purple-200 mb-4">
+        <table class="min-w-full text-sm text-left text-gray-700">
+          <thead class="bg-purple-100 text-purple-800 sticky top-0">
+            <tr>
+              <th class="px-3 py-2 font-semibold">Name</th>
+              <th class="px-3 py-2 font-semibold">Level</th>
+              <th class="px-3 py-2 font-semibold">Skill Set</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of selectedWindow?.members" class="even:bg-purple-50 hover:bg-purple-100 transition">
+              <td class="px-3 py-2">{{ member.name }}</td>
+              <td class="px-3 py-2">{{ member.level }}</td>
+              <td class="px-3 py-2">{{ member.skillSet }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <button
+        (click)="closeWindowPopup()"
+        class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:bg-purple-700 transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+  

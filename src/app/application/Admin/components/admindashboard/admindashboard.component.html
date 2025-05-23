@@ -1,0 +1,41 @@
+<div class="flex h-screen bg-gray-100">  
+  <!-- Sidebar -->
+  <aside [ngClass]="{'w-64': sidebarOpen(), 'w-16': !sidebarOpen()}" 
+         class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white flex flex-col p-4 shadow-lg h-screen fixed left-0 top-15 transition-all duration-300">
+    
+    <!-- Click Dashboard Icon to Toggle Sidebar -->
+    <button type="button"
+            class="text-2xl font-bold mb-6 text-white flex items-center cursor-pointer focus:outline-none"
+            (click)="toggleSidebar()">
+      <span class="material-icons w-6 text-center">dashboard</span> 
+      <span *ngIf="sidebarOpen()" class="ml-2">Dashboard</span>
+    </button>
+
+    <nav class="space-y-4">
+      <ul>
+        <!-- User Management Button -->
+        <li class="mb-2">
+          <a routerLink="/admindashboard/user-management"
+             class="flex items-center gap-2 p-2 rounded transition duration-200 ease-in-out transform hover:scale-105 hover:bg-[#3A006F]">
+            <span class="material-icons w-6 text-center">group</span> 
+            <span *ngIf="sidebarOpen()">User Management</span>
+          </a>
+        </li>
+
+        <!-- Role Management Button -->
+        <li class="mb-2">
+          <a routerLink="/admindashboard/role-management"
+             class="flex items-center gap-2 p-2 rounded transition duration-200 ease-in-out transform hover:scale-105 hover:bg-[#3A006F]">
+            <span class="material-icons w-6 text-center">admin_panel_settings</span> 
+            <span *ngIf="sidebarOpen()">Role Management</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6 transition-all duration-300" [ngClass]="{'ml-64': sidebarOpen(), 'ml-16': !sidebarOpen()}">
+    <router-outlet></router-outlet>
+  </div>
+</div>

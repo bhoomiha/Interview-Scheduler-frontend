@@ -1,0 +1,264 @@
+::ng-deep .fc {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+  }
+   
+  ::ng-deep .calendar-container {
+    margin-left: 20px;
+    margin-top: 20px; /* ✅ Adds space to push the calendar right */
+  }
+   
+  /* Toolbar Styling */
+  ::ng-deep .fc-toolbar {
+    background: linear-gradient(to bottom, #9b6fa5, #7a4c8f) !important;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+   
+  /* Button Styling */
+  ::ng-deep .fc .fc-button {
+    background-color: #9b6fa5!important; /* Outlook Dark Blue */
+    color: white !important;
+    border-radius: 5px; /* Smooth edges */
+    padding: 8px 16px;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase;
+  }
+   
+  /* Button Hover Effect */
+  ::ng-deep .fc .fc-button:hover {
+    background-color: #7a4c8f !important; /* Darker blue */
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+  }
+   
+  /* Active Button Styling */
+  ::ng-deep .fc .fc-button-active {
+    background-color: #7a4c8f !important;
+    color: white !important;
+    border: none;
+  }
+   
+  /* Current Day Highlight */
+  ::ng-deep .fc-day-today {
+    background-color: #9b6fa5 !important; /* Light blue for today */
+    color: white !important;
+  }
+   
+  /* Event Styling */
+  ::ng-deep .fc-event {
+    color: black !important;
+    border-radius: 5px;
+    padding: none;
+    font-weight: bold;
+  }
+   
+  /* Event Hover Effect */
+  ::ng-deep .fc-event:hover {
+    background-color: #afb2af !important; /* Darker Green */
+    cursor: pointer;
+  }
+   
+  /* Week View Time Slot Styling */
+  ::ng-deep .fc-timeGridWeek-view .fc-timegrid-slot {
+    border: 1px solid #ddd !important;
+    background-color: #f9f9f9;
+  }
+   
+  /* Table Borders */
+  ::ng-deep .fc-daygrid-day {
+    border: 1px solid #ddd !important;
+  }
+   
+  /* Calendar Title */
+  ::ng-deep .fc-toolbar-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+   
+   
+  .calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  }
+   
+  .add-event-btn {
+  background-color: #f0f2f3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  }
+   
+  .add-event-btn:hover {
+  background-color: #eceded;
+  }
+   :host ::ng-deep .fc-event.event-scheduled {
+    background-color: purple !important;
+    border-color: purple !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-completed {
+    background-color: teal !important;
+    border-color: teal !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-cancelled {
+    background-color: red !important;
+    border-color: red !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-initiated {
+    background-color: gray !important;
+    border-color: gray !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-inprogress {
+    background-color: orange !important;
+    border-color: orange !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-available {
+    background-color: green !important;
+    border-color: green !important;
+    color: #fff !important;
+  }
+  
+  :host ::ng-deep .fc-event.event-default {
+    background-color: darkgray !important;
+    border-color: darkgray !important;
+    color: #fff !important;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* Full-screen overlay for popup */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+   
+  /* Popup Box */
+  .popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+   
+  /* Header Title */
+  .popup-content h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color:#9b6fa5 !important ;
+    text-align: center;
+    font-weight: bold;
+  }
+   
+  /* Form Labels */
+  .popup-content label {
+    font-weight: bold;
+    margin: 8px 0 3px;
+    display: block;
+  }
+   
+  /* Form Inputs */
+  .popup-content select,
+  .popup-content input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+   
+  /* Action Buttons */
+  .popup-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  .status-legend-rounded {
+    position: absolute;
+    top: 40px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: max-content;
+  }
+  
+  .left-box {
+    right: 100%; /* Push the box to the left side of the icon */
+    margin-right: 10px; /* Space between icon and box */
+  }
+  
+  .status-pill {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    min-width: 120px;
+  }
+ 
+  
+  .close-popup-btn {
+  background-color: #9b6fa5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-popup-btn:hover {
+  background-color: #7a4c8f;
+  transform: scale(1.05);
+}

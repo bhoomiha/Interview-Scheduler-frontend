@@ -1,0 +1,65 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h2 class="text-3xl font-semibold text-[#9b6fa5] mb-2 text-center">Panel Calendar</h2>
+  </div>
+
+  <!-- FullCalendar Component -->
+  <full-calendar [options]="calendarOptions"></full-calendar>
+
+  <!-- Add New Event Popup -->
+<div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+    <h3 class="text-xl font-semibold mb-4 text-[#9b6fa5]">New Panel Allocation</h3>
+
+    <!-- Selected Date (Non-Editable) -->
+    <div class="mb-4">
+      <label class="block font-semibold text-[#9b6fa5] mb-2">Selected Date:</label>
+      <input type="text" [value]="createSlots.date | date:'yyyy-MM-dd'"
+        class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-[#9b6fa5]"
+        readonly />
+    </div>
+
+    <div class="flex space-x-4 mb-4">
+      <!-- Start Time -->
+      <div class="w-1/2">
+        <label for="startTime" class="block font-semibold text-[#9b6fa5] mb-2">Start Time:</label>
+        <select id="startTime" [(ngModel)]="createSlots.startTime" (change)="updateEndTimeOptions()"
+          class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]">
+          <option *ngFor="let time of availableTimeSlots" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+
+      <!-- End Time -->
+      <div class="w-1/2">
+        <label for="endTime" class="block font-semibold text-[#9b6fa5] mb-2">End Time:</label>
+        <select id="endTime" [(ngModel)]="createSlots.endTime"
+          class="w-full p-3 border border-[#9b6fa5] rounded-lg focus:ring-2 focus:ring-[#7a4c8f]">
+          <option *ngFor="let time of filteredEndTimes" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="block font-semibold text-[#9b6fa5] mb-2">Status:</label>
+      <select [(ngModel)]="createSlots.status"
+      class="block font-semibold text-[#9b6fa5] mb-2">
+      <option value="Initiated">Initiated</option>
+    </select>
+
+    <div class="popup-actions">
+      <button class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:bg-[#5a3570] transition" (click)="createSlot()">Save</button>
+      <button class="bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-2 rounded-md hover:bg-[#5a3570] transition" (click)="closePopup()">Cancel</button>
+    </div>
+
+<!-- Error Message -->
+<div *ngIf="errorMessage" class="text-red-600 text-sm font-semibold text-center mt-4 border border-red-300 bg-red-100 p-2 rounded-md">
+  {{ errorMessage }}
+</div>
+
+<!-- Success Message -->
+<p *ngIf="successMessage" class="success-message text-[#7a4c8f] bg-green-100 border border-green-300 p-2 rounded-md text-center mt-4">
+  {{ successMessage }}
+</p>
+  </div>
+</div>
+
+</div>

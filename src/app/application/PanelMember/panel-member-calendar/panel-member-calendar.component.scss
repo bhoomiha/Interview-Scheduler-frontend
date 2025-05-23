@@ -1,0 +1,220 @@
+::ng-deep .fc {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+ 
+::ng-deep .calendar-container {
+  margin-left: 20px; /* ✅ Adds space to push the calendar right */
+}
+ 
+/* Toolbar Styling */
+::ng-deep .fc-toolbar {
+  background: linear-gradient(to bottom, #9b6fa5, #7a4c8f) !important;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+ 
+/* Button Styling */
+::ng-deep .fc .fc-button {
+  background-color: #9b6fa5!important; /* Outlook Dark Blue */
+  color: white !important;
+  border-radius: 5px; /* Smooth edges */
+  padding: 8px 16px;
+  font-weight: 600;
+  border: none;
+  text-transform: uppercase;
+}
+ 
+/* Button Hover Effect */
+::ng-deep .fc .fc-button:hover {
+  background-color: #7a4c8f !important; /* Darker blue */
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+ 
+/* Active Button Styling */
+::ng-deep .fc .fc-button-active {
+  background-color: #7a4c8f !important;
+  color: white !important;
+  border: none;
+}
+ 
+/* Current Day Highlight */
+::ng-deep .fc-day-today {
+  background-color: #9b6fa5 !important; /* Light blue for today */
+  color: white !important;
+}
+ 
+ 
+/* Event Hover Effect */
+:host ::ng-deep .fc-event:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+ 
+/* Week View Time Slot Styling */
+::ng-deep .fc-timeGridWeek-view .fc-timegrid-slot {
+  border: 1px solid #ddd !important;
+  background-color: #f9f9f9;
+}
+ 
+/* Table Borders */
+::ng-deep .fc-daygrid-day {
+  border: 1px solid #ddd !important;
+}
+ 
+/* Calendar Title */
+::ng-deep .fc-toolbar-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+ 
+:host ::ng-deep .fc-event.event-scheduled {
+    background-color: #9b6fa5 !important;
+    border-color: purple !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-completed {
+    background-color: teal !important;
+    border-color: teal !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-cancelled {
+    background-color: red !important;
+    border-color: red !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-initiated {
+    background-color: gray !important;
+    border-color: gray !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-inprogress {
+    background-color: rgb(223, 215, 14) !important;
+    border-color: rgb(233, 215, 14) !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-available {
+    background-color: green !important;
+    border-color: green !important;
+    color: #fff !important;
+  }
+  :host ::ng-deep .fc-event.event-request_cancellation {
+    background-color: orange !important;
+    border-color: orange !important;
+    color: #fff !important;
+  }
+ 
+  :host ::ng-deep .fc-event.event-default {
+    background-color: darkgray !important;
+    border-color: darkgray !important;
+    color: #fff !important;
+  }
+ 
+.calendar-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+}
+ 
+.add-event-btn {
+background-color: #9b6fa5;
+color: white;
+padding: 10px 15px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-weight: bold;
+}
+ 
+.add-event-btn:hover {
+background-color: #9b6fa5;
+}
+ 
+ 
+/* Full-screen overlay for popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+ 
+/* Popup Box */
+.popup-content {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+ 
+/* Header Title */
+.popup-content h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #9b6fa5;
+  text-align: center;
+  font-weight: bold;
+}
+ 
+/* Form Labels */
+.popup-content label {
+  font-weight: bold;
+  margin: 8px 0 3px;
+  display: block;
+}
+ 
+/* Form Inputs */
+.popup-content select,
+.popup-content input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+ 
+/* Action Buttons */
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+ 
+/* Save Button */
+ 
+ 
+/* Success & Error Messages */
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+ 
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}

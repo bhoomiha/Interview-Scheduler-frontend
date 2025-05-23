@@ -1,0 +1,209 @@
+<div class="p-6 text-sm text-gray-600 ml-2">
+  <!-- Filter Buttons -->
+  <div class="flex space-x-4 mb-6">
+    <button class="px-6 py-2 rounded-md transition border border-[#9b6fa5]" [ngClass]="{
+        'bg-[#9b6fa5] text-white': activeButton !== 'unscheduled',
+        'bg-transparent text-black': activeButton === 'unscheduled'
+      }" (click)="filterSlots()">
+      Unscheduled
+    </button>
+    <button class="px-6 py-2 rounded-md transition border border-[#9b6fa5]" [ngClass]="{
+        'bg-[#9b6fa5] text-white': activeButton !== 'lockedByMe',
+        'bg-transparent text-black': activeButton === 'lockedByMe'
+      }" (click)="filterLockedByMe()">
+      Locked By Me
+    </button>
+  </div>
+
+  <!-- Slots Table -->
+  <table class="w-full border border-gray-300 shadow-lg rounded-lg">
+    <thead>
+      <tr>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-6 py-4 text-left font-medium">
+          Name
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-left font-medium">
+          Level
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-left font-medium">
+          PanelWindow
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-left font-medium">
+          StartTime
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-left font-medium">
+          EndTime
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-center font-medium"
+           (click)="toggleSortOrder()">
+          Date
+            <mat-icon>{{ sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-left font-medium">
+          Status
+        </th>
+        <th
+          class="!border-r border-gray-300 !bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white px-4 py-4 text-center font-medium">
+          Actions
+        </th>
+      </tr>
+      <tr class="bg-black-100 border-b border-gray-300">
+        <th class="p-2 !border-r border-gray-300">
+          <input type="text" [(ngModel)]="filters.name" placeholder="Search name"
+            class="p-1 border border-purple-300 rounded w-full" (input)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <select [(ngModel)]="filters.level" (change)="applyFilters()"
+            class="p-1 border border-purple-300 rounded w-16">
+            <option value="" >Level</option>
+            <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
+          </select>
+        </th>
+
+        <th class="p-2 !border-r border-gray-300">
+          <input type="text" [(ngModel)]="filters.windowName" placeholder="Search Window"
+            class="p-1 border border-purple-300 rounded w-full" (input)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <div class="flex">
+            <select [(ngModel)]="filters.startHour" class="p-1 border border-purple-300 rounded w-13"
+              (change)="applyFilters()">
+              <option value="">HH</option>
+              <option *ngFor="let hour of hoursList" [value]="hour" class="border-purple-300 text-black">
+                {{ hour }}
+              </option>
+            </select>
+            <select [(ngModel)]="filters.startMinute" class="p-1 border border-purple-300 rounded w-14"
+              (change)="applyFilters()">
+              <option value="">MM</option>
+              <option *ngFor="let minute of minutesList" [value]="minute" class="text-black">
+                {{ minute }}
+              </option>
+            </select>
+          </div>
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <div class="flex">
+            <select [(ngModel)]="filters.endHour" class="p-1 border border-purple-300 rounded w-13"
+              (change)="applyFilters()">
+              <option value="">HH</option>
+              <option *ngFor="let hour of hoursList" [value]="hour" class="text-black">
+                {{ hour }}
+              </option>
+            </select>
+            <select [(ngModel)]="filters.endMinute" class="p-1 border border-purple-300 rounded w-14"
+              (change)="applyFilters()">
+              <option value="">MM</option>
+              <option *ngFor="let minute of minutesList" [value]="minute" class="text-black">
+                {{ minute }}
+              </option>
+            </select>
+          </div>
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <input type="date" [(ngModel)]="filters.date" class="p-1 border border-purple-300 rounded w-full"
+            (change)="applyFilters()" />
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <select [(ngModel)]="filters.status" class="p-1 border border-purple-300 rounded w-full"
+            (change)="applyFilters()">
+            <option value="" class="text-black">All</option>
+            <option *ngFor="let status of statusOptions" [value]="status" class="text-black">
+              {{ status }}
+            </option>
+          </select>
+        </th>
+        <th class="p-2 !border-r border-gray-300">
+          <button
+            class="px-2 py-1 bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white rounded hover:bg-gray-600 transition duration-300"
+            (click)="resetFilters()">
+            Reset
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="
+          let slot of (selected ? unScheduledSlots : filteredSlots)
+            | paginate
+              : { itemsPerPage: itemsPerPage, currentPage: currentPage }
+        " class="text-gray-600 hover:bg-gray-100">
+        <td class="p-4 border-r border-b border-gray-300">
+          {{ slot.panelMemberName }}
+        </td>
+        <td class="p-4 border-r border-b border-gray-300">{{ slot.level }}</td>
+        <td class="p-4 border-r border-b border-gray-300">
+          {{ slot.panelWindow }}
+        </td>
+        <td class="p-4 border-r border-b border-gray-300">
+          {{ slot.startTime }}
+        </td>
+        <td class="p-4 border-r border-b border-gray-300">
+          {{ slot.endTime }}
+        </td>
+        <td class="p-4 border-r border-b border-gray-300">
+          {{ slot.date | date : "dd-MM-yyyy" }}
+        </td>
+        <td class="p-4 border-r border-b border-gray-300">
+          <span class="inline-block px-1 rounded-full text-sm font-medium cursor-pointer"
+            [title]="getStatusTooltip(slot.status)" [ngClass]="{
+              'bg-green-200 text-green-800': slot.status === 'Available',
+              'bg-purple-200 text-purple-800': slot.status === 'Scheduled',
+              'bg-yellow-200 text-yellow-800': slot.status === 'InProgress',
+              'bg-red-200 text-red-800': slot.status === 'Cancelled',
+              'bg-orange-200 text-orange-800':
+                slot.status === 'Request Cancellation'
+            }">
+            {{ slot.status }}
+          </span>
+        </td>
+
+        <td class="p-4 border-r border-b border-gray-300">
+          <div class="flex space-x-2">
+            <button
+              class="flex items-center justify-center w-8 h-8 bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white rounded-md hover:from-[#8e5585] hover:to-[#6f3b76] transition"
+              (click)="openPanelDetails(slot)">
+              <mat-icon class="text-1xl">account_circle</mat-icon>
+            </button>
+
+            <button class="flex items-center justify-center w-8 h-8 text-white rounded-md transition" [ngClass]="{
+                'bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] hover:from-[#8e5585] hover:to-[#6f3b76]': !slot.lockedBy || slot.lockedBy === currentUserId,
+                'bg-gray-400': slot.lockedBy && slot.lockedBy !== currentUserId
+              }" (click)="toggleLock(slot)">
+              <mat-icon>
+                {{ slot.lockedBy ? "lock" : "lock_open" }}
+              </mat-icon>
+            </button>
+
+            <button
+              class="px-3 py-1 bg-gradient-to-t from-[#9b6fa5] to-[#7a4c8f] text-white rounded-md hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              (click)="openScheduleModal(slot)" [disabled]="
+                slot.lockedBy !== currentUserId || slot.status == 'Scheduled'
+              ">
+              Schedule
+            </button>
+          </div>
+        </td>
+
+      </tr>
+      <!-- No Records Found -->
+      <tr *ngIf="(selected ? unScheduledSlots : filteredSlots).length === 0">
+        <td colspan="6" class="text-center text-red-600 py-4 font-semibold">
+          No interviews found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Pagination Controls -->
+  <div class="flex justify-end mt-4">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
