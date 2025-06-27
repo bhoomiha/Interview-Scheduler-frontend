@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/',
+  basePath: '/Interview-Scheduler-frontend',
   supportedLocales: {
   "en-US": ""
 },

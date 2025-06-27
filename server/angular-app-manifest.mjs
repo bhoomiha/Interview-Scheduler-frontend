@@ -2,35 +2,35 @@
 export default {
   bootstrap: () => import('./main.server.mjs').then(m => m.default),
   inlineCriticalCss: true,
-  baseHref: '/',
+  baseHref: '/Interview-Scheduler-frontend/',
   locale: undefined,
   routes: [
   {
     "renderMode": 2,
-    "route": "/home"
+    "route": "/Interview-Scheduler-frontend/home"
   },
   {
     "renderMode": 2,
-    "route": "/login"
+    "route": "/Interview-Scheduler-frontend/login"
   },
   {
     "renderMode": 2,
-    "route": "/verify-otp"
+    "route": "/Interview-Scheduler-frontend/verify-otp"
   },
   {
     "renderMode": 2,
-    "route": "/network-error"
+    "route": "/Interview-Scheduler-frontend/network-error"
   },
   {
     "renderMode": 2,
-    "route": "/changepassword"
+    "route": "/Interview-Scheduler-frontend/changepassword"
   },
   {
     "renderMode": 2,
     "preload": [
       "chunk-2IQBELJQ.js"
     ],
-    "route": "/admindashboard"
+    "route": "/Interview-Scheduler-frontend/admindashboard"
   },
   {
     "renderMode": 2,
@@ -42,7 +42,7 @@ export default {
       "chunk-7RAIQIRP.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/admindashboard/user-management"
+    "route": "/Interview-Scheduler-frontend/admindashboard/user-management"
   },
   {
     "renderMode": 2,
@@ -51,7 +51,7 @@ export default {
       "chunk-WNL6AGL5.js",
       "chunk-7RAIQIRP.js"
     ],
-    "route": "/admindashboard/role-management"
+    "route": "/Interview-Scheduler-frontend/admindashboard/role-management"
   },
   {
     "renderMode": 2,
@@ -67,7 +67,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator"
   },
   {
     "renderMode": 2,
@@ -83,7 +83,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/dashboard"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/dashboard"
   },
   {
     "renderMode": 2,
@@ -99,7 +99,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/all-panelMembers"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/all-panelMembers"
   },
   {
     "renderMode": 2,
@@ -115,7 +115,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/map-panel-member"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/map-panel-member"
   },
   {
     "renderMode": 2,
@@ -131,7 +131,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/mapped-panel-member"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/mapped-panel-member"
   },
   {
     "renderMode": 2,
@@ -147,7 +147,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/allocate-panel-window"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/allocate-panel-window"
   },
   {
     "renderMode": 2,
@@ -163,7 +163,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/panel-windows"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/panel-windows"
   },
   {
     "renderMode": 2,
@@ -179,7 +179,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/panel-coordinator/panel-calendar"
+    "route": "/Interview-Scheduler-frontend/panel-coordinator/panel-calendar"
   },
   {
     "renderMode": 2,
@@ -195,7 +195,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member"
+    "route": "/Interview-Scheduler-frontend/panel-member"
   },
   {
     "renderMode": 2,
@@ -211,7 +211,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member/dashboard"
+    "route": "/Interview-Scheduler-frontend/panel-member/dashboard"
   },
   {
     "renderMode": 2,
@@ -227,7 +227,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member/get-slots"
+    "route": "/Interview-Scheduler-frontend/panel-member/get-slots"
   },
   {
     "renderMode": 2,
@@ -243,7 +243,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member/panel-member-calendar"
+    "route": "/Interview-Scheduler-frontend/panel-member/panel-member-calendar"
   },
   {
     "renderMode": 2,
@@ -259,7 +259,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member/panel-member-window"
+    "route": "/Interview-Scheduler-frontend/panel-member/panel-member-window"
   },
   {
     "renderMode": 2,
@@ -275,7 +275,7 @@ export default {
       "chunk-JRQ3EUPC.js",
       "chunk-IDUWUNZ3.js"
     ],
-    "route": "/panel-member/slot-form"
+    "route": "/Interview-Scheduler-frontend/panel-member/slot-form"
   },
   {
     "renderMode": 2,
@@ -290,7 +290,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/tadmin"
+    "route": "/Interview-Scheduler-frontend/tadmin"
   },
   {
     "renderMode": 2,
@@ -305,7 +305,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/tadmin/dashboard"
+    "route": "/Interview-Scheduler-frontend/tadmin/dashboard"
   },
   {
     "renderMode": 2,
@@ -320,7 +320,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/tadmin/interview-list"
+    "route": "/Interview-Scheduler-frontend/tadmin/interview-list"
   },
   {
     "renderMode": 2,
@@ -335,7 +335,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/tadmin/calendar"
+    "route": "/Interview-Scheduler-frontend/tadmin/calendar"
   },
   {
     "renderMode": 2,
@@ -349,7 +349,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/ta-recruiter"
+    "route": "/Interview-Scheduler-frontend/ta-recruiter"
   },
   {
     "renderMode": 2,
@@ -363,7 +363,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/ta-recruiter/tadashboard"
+    "route": "/Interview-Scheduler-frontend/ta-recruiter/tadashboard"
   },
   {
     "renderMode": 2,
@@ -377,7 +377,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/ta-recruiter/slot-list"
+    "route": "/Interview-Scheduler-frontend/ta-recruiter/slot-list"
   },
   {
     "renderMode": 2,
@@ -391,7 +391,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/ta-recruiter/schedule-calendar"
+    "route": "/Interview-Scheduler-frontend/ta-recruiter/schedule-calendar"
   },
   {
     "renderMode": 2,
@@ -405,7 +405,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/ta-recruiter/scheduled-interviews"
+    "route": "/Interview-Scheduler-frontend/ta-recruiter/scheduled-interviews"
   },
   {
     "renderMode": 2,
@@ -419,7 +419,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/reporting-manager"
+    "route": "/Interview-Scheduler-frontend/reporting-manager"
   },
   {
     "renderMode": 2,
@@ -433,7 +433,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/reporting-manager/dashboard"
+    "route": "/Interview-Scheduler-frontend/reporting-manager/dashboard"
   },
   {
     "renderMode": 2,
@@ -447,7 +447,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/reporting-manager/team-members"
+    "route": "/Interview-Scheduler-frontend/reporting-manager/team-members"
   },
   {
     "renderMode": 2,
@@ -461,7 +461,7 @@ export default {
       "chunk-D65YN2DH.js",
       "chunk-C762CE46.js"
     ],
-    "route": "/reporting-manager/reporting-manager-calendar"
+    "route": "/Interview-Scheduler-frontend/reporting-manager/reporting-manager-calendar"
   },
   {
     "renderMode": 2,
@@ -469,59 +469,59 @@ export default {
       "chunk-IPECC6QC.js",
       "chunk-WG3S2NED.js"
     ],
-    "route": "/candidate"
+    "route": "/Interview-Scheduler-frontend/candidate"
   },
   {
     "renderMode": 2,
-    "route": "/unauthorized"
+    "route": "/Interview-Scheduler-frontend/unauthorized"
   },
   {
     "renderMode": 2,
-    "redirectTo": "/login",
-    "route": "/**"
+    "redirectTo": "/Interview-Scheduler-frontend/login",
+    "route": "/Interview-Scheduler-frontend/**"
   }
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 31090, hash: 'fb017ee39765f6e1601f0f6c8e59151364afa0f659942438a02feedd7792c65e', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 17480, hash: '3a4f113126165c30f0330ce9b50d2f79cfc377151a615938936592b54a73b617', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'login/index.html': {size: 36315, hash: '732f292fef3f25a2226f348a8e24724c8c09e82413066ddce0c62c575ca3b7b7', text: () => import('./assets-chunks/login_index_html.mjs').then(m => m.default)},
-    'network-error/index.html': {size: 38475, hash: '9036a0dce5ad460e75cbe1af0e97ebf61f81fd78bf7c54780046608953f45fa0', text: () => import('./assets-chunks/network-error_index_html.mjs').then(m => m.default)},
-    'changepassword/index.html': {size: 36315, hash: '732f292fef3f25a2226f348a8e24724c8c09e82413066ddce0c62c575ca3b7b7', text: () => import('./assets-chunks/changepassword_index_html.mjs').then(m => m.default)},
-    'admindashboard/index.html': {size: 36368, hash: '32fa968b4882392b41e520210048d6626c5517147f60abefaa542b81a114807c', text: () => import('./assets-chunks/admindashboard_index_html.mjs').then(m => m.default)},
-    'admindashboard/user-management/index.html': {size: 36628, hash: 'c550533b04bdae736d4a2882e873cab45e55e18464a74350db83b82b17d76711', text: () => import('./assets-chunks/admindashboard_user-management_index_html.mjs').then(m => m.default)},
-    'admindashboard/role-management/index.html': {size: 36472, hash: '041c9354280e2142b4cd48a48e018b4f437be690f7d57765417036f205493617', text: () => import('./assets-chunks/admindashboard_role-management_index_html.mjs').then(m => m.default)},
-    'home/index.html': {size: 37215, hash: 'a9df69a31bf5087541b49f8a34359cea66405a3479778735d99e3731fe776600', text: () => import('./assets-chunks/home_index_html.mjs').then(m => m.default)},
-    'verify-otp/index.html': {size: 36315, hash: '732f292fef3f25a2226f348a8e24724c8c09e82413066ddce0c62c575ca3b7b7', text: () => import('./assets-chunks/verify-otp_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/map-panel-member/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_map-panel-member_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/mapped-panel-member/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_mapped-panel-member_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/dashboard/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_dashboard_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/all-panelMembers/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_all-panelMembers_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/allocate-panel-window/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_allocate-panel-window_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/panel-calendar/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_panel-calendar_index_html.mjs').then(m => m.default)},
-    'panel-coordinator/panel-windows/index.html': {size: 36836, hash: 'c28da0797dde7ef538159da1aab8054c05bfb4d1db7afeac6662550aaa25bb99', text: () => import('./assets-chunks/panel-coordinator_panel-windows_index_html.mjs').then(m => m.default)},
-    'panel-member/dashboard/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_dashboard_index_html.mjs').then(m => m.default)},
-    'panel-member/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_index_html.mjs').then(m => m.default)},
-    'panel-member/get-slots/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_get-slots_index_html.mjs').then(m => m.default)},
-    'panel-member/panel-member-window/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_panel-member-window_index_html.mjs').then(m => m.default)},
-    'panel-member/slot-form/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_slot-form_index_html.mjs').then(m => m.default)},
-    'panel-member/panel-member-calendar/index.html': {size: 36836, hash: '83c2c52656ac2305b6e59cc0345fd116a9bb49bf63eb5302485bea694c3e83b8', text: () => import('./assets-chunks/panel-member_panel-member-calendar_index_html.mjs').then(m => m.default)},
-    'tadmin/dashboard/index.html': {size: 36784, hash: 'f47aae857022a6cb51014cd793d3c221f894b4359ea293437858fdb8a99f1b89', text: () => import('./assets-chunks/tadmin_dashboard_index_html.mjs').then(m => m.default)},
-    'tadmin/index.html': {size: 36784, hash: 'f47aae857022a6cb51014cd793d3c221f894b4359ea293437858fdb8a99f1b89', text: () => import('./assets-chunks/tadmin_index_html.mjs').then(m => m.default)},
-    'tadmin/calendar/index.html': {size: 36784, hash: 'f47aae857022a6cb51014cd793d3c221f894b4359ea293437858fdb8a99f1b89', text: () => import('./assets-chunks/tadmin_calendar_index_html.mjs').then(m => m.default)},
-    'tadmin/interview-list/index.html': {size: 36784, hash: 'f47aae857022a6cb51014cd793d3c221f894b4359ea293437858fdb8a99f1b89', text: () => import('./assets-chunks/tadmin_interview-list_index_html.mjs').then(m => m.default)},
-    'ta-recruiter/slot-list/index.html': {size: 36732, hash: 'dd39cd098365aefde9ef4d3f5c44d0a934b0f7409e1c859c6dfd217bab4edceb', text: () => import('./assets-chunks/ta-recruiter_slot-list_index_html.mjs').then(m => m.default)},
-    'ta-recruiter/index.html': {size: 36732, hash: 'dd39cd098365aefde9ef4d3f5c44d0a934b0f7409e1c859c6dfd217bab4edceb', text: () => import('./assets-chunks/ta-recruiter_index_html.mjs').then(m => m.default)},
-    'ta-recruiter/tadashboard/index.html': {size: 36732, hash: 'dd39cd098365aefde9ef4d3f5c44d0a934b0f7409e1c859c6dfd217bab4edceb', text: () => import('./assets-chunks/ta-recruiter_tadashboard_index_html.mjs').then(m => m.default)},
-    'ta-recruiter/schedule-calendar/index.html': {size: 36732, hash: 'dd39cd098365aefde9ef4d3f5c44d0a934b0f7409e1c859c6dfd217bab4edceb', text: () => import('./assets-chunks/ta-recruiter_schedule-calendar_index_html.mjs').then(m => m.default)},
-    'ta-recruiter/scheduled-interviews/index.html': {size: 36732, hash: 'dd39cd098365aefde9ef4d3f5c44d0a934b0f7409e1c859c6dfd217bab4edceb', text: () => import('./assets-chunks/ta-recruiter_scheduled-interviews_index_html.mjs').then(m => m.default)},
-    'reporting-manager/index.html': {size: 36732, hash: '6ce8d7c032503ea825a59c1979bbb4d5c341ebfbd74869460dccef009d5c1ce8', text: () => import('./assets-chunks/reporting-manager_index_html.mjs').then(m => m.default)},
-    'reporting-manager/team-members/index.html': {size: 36732, hash: '6ce8d7c032503ea825a59c1979bbb4d5c341ebfbd74869460dccef009d5c1ce8', text: () => import('./assets-chunks/reporting-manager_team-members_index_html.mjs').then(m => m.default)},
-    'reporting-manager/dashboard/index.html': {size: 36732, hash: '6ce8d7c032503ea825a59c1979bbb4d5c341ebfbd74869460dccef009d5c1ce8', text: () => import('./assets-chunks/reporting-manager_dashboard_index_html.mjs').then(m => m.default)},
-    'candidate/index.html': {size: 36420, hash: '281b1a0c7c4006cec1003ebb6507352424ee01311f34c00452eb41bf671227be', text: () => import('./assets-chunks/candidate_index_html.mjs').then(m => m.default)},
-    'reporting-manager/reporting-manager-calendar/index.html': {size: 36732, hash: '6ce8d7c032503ea825a59c1979bbb4d5c341ebfbd74869460dccef009d5c1ce8', text: () => import('./assets-chunks/reporting-manager_reporting-manager-calendar_index_html.mjs').then(m => m.default)},
-    'unauthorized/index.html': {size: 37018, hash: 'cd2b2d1a49cecaac5804ab8dc598dc4801ed99c9cb6ff8fb0243ee9bc8bea2e3', text: () => import('./assets-chunks/unauthorized_index_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 31119, hash: '5f08a5c98d0e7ecf8693dfe810570aa95749eb003e0870b355271d1b8f0e62eb', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 17509, hash: '24df912389b76789bf44dff9e7ab7edf3a619394a2da921cefb8a99a949de7af', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'login/index.html': {size: 36344, hash: '5e7a65399c8eec8cdb3a5a4d4db988a0fccc49c1c309cff8fa92ff76ceb2204d', text: () => import('./assets-chunks/login_index_html.mjs').then(m => m.default)},
+    'network-error/index.html': {size: 38504, hash: '82f066f7db135a1b1294dd3484a91db65f0de1e4028ae79de6e6b523e1ee9e82', text: () => import('./assets-chunks/network-error_index_html.mjs').then(m => m.default)},
+    'changepassword/index.html': {size: 36344, hash: '5e7a65399c8eec8cdb3a5a4d4db988a0fccc49c1c309cff8fa92ff76ceb2204d', text: () => import('./assets-chunks/changepassword_index_html.mjs').then(m => m.default)},
+    'admindashboard/index.html': {size: 36397, hash: '0f81471be623629f0d7961c3ed11535c3718202bdfbf99a3111d5764b218b7f4', text: () => import('./assets-chunks/admindashboard_index_html.mjs').then(m => m.default)},
+    'admindashboard/user-management/index.html': {size: 36657, hash: 'f7a8eb663450a9a97846ad9937f48fa5bd138a0185003d034130086c70e3a0e7', text: () => import('./assets-chunks/admindashboard_user-management_index_html.mjs').then(m => m.default)},
+    'admindashboard/role-management/index.html': {size: 36501, hash: 'af8addcd6497c3309c3d09abda62bc0b8c10e8a6ec294b98db0ed2fd3b027579', text: () => import('./assets-chunks/admindashboard_role-management_index_html.mjs').then(m => m.default)},
+    'verify-otp/index.html': {size: 36344, hash: '5e7a65399c8eec8cdb3a5a4d4db988a0fccc49c1c309cff8fa92ff76ceb2204d', text: () => import('./assets-chunks/verify-otp_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/all-panelMembers/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_all-panelMembers_index_html.mjs').then(m => m.default)},
+    'home/index.html': {size: 37244, hash: '72bc37fa720baa0d3ee7323fb4f703400fea133f95cacf88beb8a26f8fad2c10', text: () => import('./assets-chunks/home_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/map-panel-member/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_map-panel-member_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/allocate-panel-window/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_allocate-panel-window_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/dashboard/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_dashboard_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/panel-windows/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_panel-windows_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/panel-calendar/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_panel-calendar_index_html.mjs').then(m => m.default)},
+    'panel-member/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_index_html.mjs').then(m => m.default)},
+    'panel-member/get-slots/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_get-slots_index_html.mjs').then(m => m.default)},
+    'panel-member/dashboard/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_dashboard_index_html.mjs').then(m => m.default)},
+    'panel-member/panel-member-calendar/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_panel-member-calendar_index_html.mjs').then(m => m.default)},
+    'panel-coordinator/mapped-panel-member/index.html': {size: 36865, hash: '438224b767bd19c0e22b5c5b5606528db09c2c0520b052af0d795c09b247ea99', text: () => import('./assets-chunks/panel-coordinator_mapped-panel-member_index_html.mjs').then(m => m.default)},
+    'panel-member/panel-member-window/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_panel-member-window_index_html.mjs').then(m => m.default)},
+    'panel-member/slot-form/index.html': {size: 36865, hash: '94d97a089c692dbfb3758f86cfeded761880f0c55bf7594ac7756c195714fe69', text: () => import('./assets-chunks/panel-member_slot-form_index_html.mjs').then(m => m.default)},
+    'tadmin/interview-list/index.html': {size: 36813, hash: 'b929f291e4f1792eb368cc0ec5a455ae446fbc77861e54426db553177b34a102', text: () => import('./assets-chunks/tadmin_interview-list_index_html.mjs').then(m => m.default)},
+    'tadmin/dashboard/index.html': {size: 36813, hash: 'b929f291e4f1792eb368cc0ec5a455ae446fbc77861e54426db553177b34a102', text: () => import('./assets-chunks/tadmin_dashboard_index_html.mjs').then(m => m.default)},
+    'tadmin/index.html': {size: 36813, hash: 'b929f291e4f1792eb368cc0ec5a455ae446fbc77861e54426db553177b34a102', text: () => import('./assets-chunks/tadmin_index_html.mjs').then(m => m.default)},
+    'tadmin/calendar/index.html': {size: 36813, hash: 'b929f291e4f1792eb368cc0ec5a455ae446fbc77861e54426db553177b34a102', text: () => import('./assets-chunks/tadmin_calendar_index_html.mjs').then(m => m.default)},
+    'ta-recruiter/index.html': {size: 36761, hash: 'bf52bd1a8fc6204c8483f2e6ab7bdd31c50ca53b10330e58e816a2b4546e4bbe', text: () => import('./assets-chunks/ta-recruiter_index_html.mjs').then(m => m.default)},
+    'ta-recruiter/tadashboard/index.html': {size: 36761, hash: 'bf52bd1a8fc6204c8483f2e6ab7bdd31c50ca53b10330e58e816a2b4546e4bbe', text: () => import('./assets-chunks/ta-recruiter_tadashboard_index_html.mjs').then(m => m.default)},
+    'ta-recruiter/slot-list/index.html': {size: 36761, hash: 'bf52bd1a8fc6204c8483f2e6ab7bdd31c50ca53b10330e58e816a2b4546e4bbe', text: () => import('./assets-chunks/ta-recruiter_slot-list_index_html.mjs').then(m => m.default)},
+    'ta-recruiter/schedule-calendar/index.html': {size: 36761, hash: 'bf52bd1a8fc6204c8483f2e6ab7bdd31c50ca53b10330e58e816a2b4546e4bbe', text: () => import('./assets-chunks/ta-recruiter_schedule-calendar_index_html.mjs').then(m => m.default)},
+    'ta-recruiter/scheduled-interviews/index.html': {size: 36761, hash: 'bf52bd1a8fc6204c8483f2e6ab7bdd31c50ca53b10330e58e816a2b4546e4bbe', text: () => import('./assets-chunks/ta-recruiter_scheduled-interviews_index_html.mjs').then(m => m.default)},
+    'reporting-manager/index.html': {size: 36761, hash: '35b9a56bc9526519068d074e19ed1e8d75192c9cbdacf37052d28020b2215ca3', text: () => import('./assets-chunks/reporting-manager_index_html.mjs').then(m => m.default)},
+    'reporting-manager/reporting-manager-calendar/index.html': {size: 36761, hash: '35b9a56bc9526519068d074e19ed1e8d75192c9cbdacf37052d28020b2215ca3', text: () => import('./assets-chunks/reporting-manager_reporting-manager-calendar_index_html.mjs').then(m => m.default)},
+    'reporting-manager/team-members/index.html': {size: 36761, hash: '35b9a56bc9526519068d074e19ed1e8d75192c9cbdacf37052d28020b2215ca3', text: () => import('./assets-chunks/reporting-manager_team-members_index_html.mjs').then(m => m.default)},
+    'reporting-manager/dashboard/index.html': {size: 36761, hash: '35b9a56bc9526519068d074e19ed1e8d75192c9cbdacf37052d28020b2215ca3', text: () => import('./assets-chunks/reporting-manager_dashboard_index_html.mjs').then(m => m.default)},
+    'candidate/index.html': {size: 36449, hash: '12cb5ef71eb2db5c731f2b1e2b5c88b8af7d69f445e119d6de1a70327ea86438', text: () => import('./assets-chunks/candidate_index_html.mjs').then(m => m.default)},
+    'unauthorized/index.html': {size: 37047, hash: 'e13603f7063e0001fd19f0d5d0f908f22b3e6fb052c01d0ab026b9aace7104e1', text: () => import('./assets-chunks/unauthorized_index_html.mjs').then(m => m.default)},
     'styles-IDY6Z7HY.css': {size: 42144, hash: 'hj+Ds5H6n2o', text: () => import('./assets-chunks/styles-IDY6Z7HY_css.mjs').then(m => m.default)}
   },
 };
