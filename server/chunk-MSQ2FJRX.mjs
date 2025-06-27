@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{V as i,_ as e,ed as a}from"./chunk-W6UZLTR5.mjs";var l=class t{constructor(o){this.http=o}apiUrl="https://localhost:5001/api/SlotAvailability";getAllSlot(){return this.http.get(`${this.apiUrl}/AllSlots`)}updateSlotStatus(o,r){return this.http.patch(`${this.apiUrl}/UpdateSlotStatus?slotId=${o}&status=${r}`,{},{responseType:"text"})}static \u0275fac=function(r){return new(r||t)(e(a))};static \u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"})};export{l as a};
